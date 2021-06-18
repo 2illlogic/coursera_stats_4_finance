@@ -1,9 +1,9 @@
 import pandas as pd
 import yfinance as yf
 import datetime as dt
-import time
-import requests
-import io
+#import time
+#import requests
+#import io
 import os
 
 cwd = os.getcwd()
@@ -40,3 +40,31 @@ for i in tickers:
       None
 
 prices.to_csv('ex_stock_data.csv')
+#lookup ticker by company name
+
+#retrieve data for a list of assets by ticker
+def get_assets(tickers=[]
+                ,start = dt.date.today() + dt.timedelta(days = -364)
+                ,end = dt.date.today()
+               ):
+    if len(tickers) == 0:
+        print('No assets selected.')
+    
+    else:    
+        data = pd.DataFrame()
+    
+        for t in tickers:
+            try:
+              stock = []
+              stock = yf.download(t, start=start, end=end, progress=False)
+      
+              if len(stock) == 0:
+                 None
+              else:
+                 data=data.append(stock,sort=False)
+            except Exception:
+              None
+    
+        return data
+              
+get_assets(['CBSH']).to_csv('commerce_data.csv')   
